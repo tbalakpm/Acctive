@@ -39,7 +39,7 @@ namespace Acctive.Controllers
             {
                 db.Warehouse.Add(warehouse);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             return View(warehouse);

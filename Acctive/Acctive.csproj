@@ -183,6 +183,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LedgersController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\UnitController.cs" />
@@ -673,6 +674,12 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Ledgers\Create.cshtml" />
+    <Content Include="Views\Ledgers\Delete.cshtml" />
+    <Content Include="Views\Ledgers\Details.cshtml" />
+    <Content Include="Views\Ledgers\Edit.cshtml" />
+    <Content Include="Views\Ledgers\Index.cshtml" />
+    <Content Include="Views\Products\_Fields.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

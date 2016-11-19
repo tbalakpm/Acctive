@@ -64,7 +64,7 @@ namespace Acctive.Controllers
 
                 db.Unit.Add(unit);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             //ViewBag.CompanyId = new SelectList(db.Company, "Id", "Code", unit.CompanyId);

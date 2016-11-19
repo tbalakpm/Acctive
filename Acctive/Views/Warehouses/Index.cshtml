@@ -75,7 +75,10 @@
 
             // Datatables
             $('#datatable').dataTable({
-                fixedHeader: true
+                fixedHeader: true,
+                "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+                "iDisplayLength": 25,
+                "pageLength": 25
             });
 
             //$('#datatable-responsive').DataTable();

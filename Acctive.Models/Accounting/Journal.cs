@@ -12,7 +12,7 @@ namespace Acctive.Models.Accounting
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Journal code cannot be empty")]
-        [Index("JnlCode", IsUnique = true, Order = 1)]
+        [Index("IX_JnlCode", IsUnique = true, Order = 1)]
         [StringLength(15)]
         public string Code { get; set; }
 
@@ -46,7 +46,7 @@ namespace Acctive.Models.Accounting
         [ForeignKey("Account")]
         public int AccountId { get; set; }
 
-        [Index("JnlCode", IsUnique = true, Order = 2)]
+        [Index("IX_JnlCode", IsUnique = true, Order = 2)]
         [ForeignKey("Period")]
         public int PeriodId { get; set; }
 
@@ -62,8 +62,7 @@ namespace Acctive.Models.Accounting
 
     public enum JournalType
     {
-        Unknown,
-        Receipts,
+        Receipts = 1,
         Payments,
         Deposits,
         Withdrawals,
@@ -72,5 +71,5 @@ namespace Acctive.Models.Accounting
         Sales
     }
 
-    public enum TransactionType : byte { Unknown, Debit, Credit }
+    public enum TransactionType : byte { Debit = 1, Credit }
 }

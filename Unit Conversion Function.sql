@@ -185,6 +185,8 @@ BEGIN
 END
 GO
 
+select * from Company
+
 SELECT * FROM Product
 
 SELECT * FROM Invoice
@@ -192,9 +194,11 @@ SELECT * FROM InvoiceItem
 
 SELECT * FROM Inventory
 
+select * from AccountCategory
 select * from Account
+select * from [Period] where CompanyId=2
 
-INSERT INTO Invoice(Code,[Date],AccountId,TranAccountId,[Type],PeriodId) VALUES('M-001','2016-11-01'
+-- INSERT INTO Invoice(Code,[Date],AccountId,TranAccountId,[InvoiceType],PeriodId) VALUES('M-001','2016-11-01',1,2,'Purchase',7)
 
 SELECT 1
 FROM Invoice i WITH(NOLOCK)

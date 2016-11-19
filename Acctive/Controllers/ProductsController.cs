@@ -58,7 +58,7 @@ namespace Acctive.Controllers
             {
                 db.Product.Add(product);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             ViewBag.CategoryId = new SelectList(db.ProductCategory, "Id", "Code", product.CategoryId);

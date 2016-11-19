@@ -57,15 +57,16 @@ namespace Acctive.Models.Inventory
         //[Column(TypeName = "money")]
         //public decimal Commission { get; set; }
 
-        //[Column("InvoiceType", TypeName = "char")]
-        //public char TypeString
-        //{
-        //    get { return TypeToString(Type); }
-        //    private set { Type = EnumExtensions.ParseEnum<InvoiceType>(value); }
-        //}
+        [Column("InvoiceType", TypeName = "varchar")]
+        [StringLength(10)]
+        public string InvoiceTypeString
+        {
+            get { return InvoiceType.ToString(); }
+            private set { InvoiceType = EnumExtensions.ParseEnum<InvoiceType>(value); }
+        }
 
-        //[NotMapped]
-        public InvoiceType Type { get; set; }
+        [NotMapped]
+        public InvoiceType InvoiceType { get; set; }
 
         [Timestamp]
         public byte[] RowVersion { get; set; }
@@ -87,11 +88,10 @@ namespace Acctive.Models.Inventory
 
     public enum InvoiceType
     {
-        Unknown
-        , OpeningStock      // 'O'
-        , Purchase          // 'P'
-        , PurchaseReturn    // 'U'
-        , Sales             // 'S'
-        , SalesReturn       // 'R'
+        Stock = 1    // 'O'
+        , Purchase   // 'P'
+        , PurReturn  // 'U'
+        , Sales      // 'S'
+        , SalReturn  // 'R'
     }
 }
