@@ -1,0 +1,138 @@
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Acctive</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/datatables")
+</head>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="@Url.Action("Index","Home")" class="site_title"><i class="fa fa-leaf"></i> <span>Acctive</span></a>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <!-- menu profile quick info -->
+                    <div class="profile">
+                        <div class="profile_pic">
+                            <img src="~/images/img.jpg" alt="..." class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <span>Welcome,</span>
+                            <h2>@User.Identity.GetUserName()</h2>
+                        </div>
+                    </div>
+                    <!-- /menu profile quick info -->
+                    <div class="clearfix"></div>
+                    <br />
+                    @Html.Partial("_Sidebar")
+                </div>
+            </div>
+            @Html.Partial("_NavBar")
+            <div class="right_col" role="main">
+                @RenderBody()
+            </div>
+            <!-- /footer content -->
+        </div>
+    </div>
+    <!-- footer content -->
+    <footer>
+        <!--style="margin-top:-23px;"-->
+        <div class="pull-right">
+            Copyright &copy; @DateTime.Now.Year <a href="http://www.acctive.co.in">Acctive</a>
+        </div>
+        <div class="clearfix"></div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datatables")
+    @Scripts.Render("~/bundles/icheck")
+    @Scripts.Render("~/bundles/smartwizard")
+    @Scripts.Render("~/bundles/datepicker")
+
+    @RenderSection("scripts", required: false)
+
+    @*<script>
+            $(document).ready(function () {
+
+                // Datatables
+                $('#datatable').dataTable({
+                    fixedHeader: true
+                });
+
+                $('#wizard').smartWizard({
+                    enableAllSteps: true,
+                    reverseButtonsOrder: true,
+                    onFinish: onFinishCallback
+                });
+
+                function onFinishCallback(objs, context) {
+                    $('form').submit();
+                }
+
+                $('.buttonNext').addClass('btn btn-success');
+                $('.buttonPrevious').addClass('btn btn-primary');
+                $('.buttonFinish').addClass('btn btn-default');
+
+                //var today = new Date();
+                //var beginDate;
+                //var endDate;
+                //if (today.getMonth() >= 4 && today.getMonth() <= 12) {
+                //    beginDate = new Date(today.getFullYear(), 4, 1);
+                //    endDate = new Date(today.getFullYear() + 1, 3, 31);
+                //}
+                //else {
+                //    beginDate = new Date(today.getFullYear() - 1, 4, 1);
+                //    endDate = new Date(today.getFullYear(), 3, 31);
+                //}
+
+                $('#BeginDate, #EndDate').daterangepicker({
+                    singleDatePicker: true,
+                    showDropDowns: true,
+                    autoUpdateInput: true,
+                    locale: {
+                        format: "DD/MM/YYYY"
+                    }
+                }, function (start, end, label) {
+                    console.log(start.toISOString(), end.toISOString(), label);
+                });
+                //$('#BeginDate').daterangepicker('setDate', beginDate);
+                //$('#EndDate').datepicker('setDate', endDate);
+
+                //$('#datatable-keytable').DataTable({
+                //    keys: true
+                //});
+
+                //$('#datatable-responsive').DataTable();
+
+                //$('#datatable-fixed-header').DataTable({
+                //    fixedHeader: true
+                //});
+
+                //var $datatable = $('#datatable-checkbox');
+
+                //$datatable.dataTable({
+                //    'order': [[1, 'asc']],
+                //    'columnDefs': [
+                //      { orderable: false, targets: [0] }
+                //    ]
+                //});
+                //$datatable.on('draw.dt', function () {
+                //    $('input').iCheck({
+                //        checkboxClass: 'icheckbox_flat-green'
+                //    });
+                //});
+            });
+        </script>*@
+</body>
+</html>

@@ -1,0 +1,138 @@
+﻿@*@model Acctive.Models.Application.Company*@
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Create Company</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                @using (Html.BeginForm())
+                {
+                <!-- Smart Wizard -->
+                    <div id="wizard" class="form_wizard wizard_horizontal">
+                        <ul class="wizard_steps">
+                            <li>
+                                <a href="#step-1">
+                                    <span class="step_no">1</span>
+                                    <span class="step_descr">
+                                        Company<br />
+                                        <small>Company Details</small>
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#step-2">
+                                    <span class="step_no">2</span>
+                                    <span class="step_descr">
+                                        Address<br />
+                                        <small>Address Information</small>
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#step-3">
+                                    <span class="step_no">3</span>
+                                    <span class="step_descr">
+                                        Accounting Year<br />
+                                        <small>Accounting Year</small>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div id="step-1">
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal form-label-left">
+                                @Html.Partial("_CompanyFields")
+                            </div>
+                        </div>
+                        <div id="step-2">
+                            <div class="form-horizontal form-label-left">
+                                @Html.Partial("_AddressFields")
+                            </div>
+                        </div>
+                        <div id="step-3">
+                            <div class="form-horizontal form-label-left">
+                                @Html.Partial("_PeriodFields")
+                            </div>
+                        </div>
+                    </div>
+                <!-- End SmartWizard Content -->
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+
+            $('#wizard').smartWizard({
+                enableAllSteps: true,
+                reverseButtonsOrder: true,
+                keyNavigation: false,
+                onFinish: onFinishCallback
+            });
+
+            function onFinishCallback(objs, context) {
+                $('form').submit();
+            }
+
+            $('.buttonNext').addClass('btn btn-success');
+            $('.buttonPrevious').addClass('btn btn-primary');
+            $('.buttonFinish').addClass('btn btn-default');
+
+            //var today = new Date();
+            //var beginDate;
+            //var endDate;
+            //if (today.getMonth() >= 4 && today.getMonth() <= 12) {
+            //    beginDate = new Date(today.getFullYear(), 4, 1);
+            //    endDate = new Date(today.getFullYear() + 1, 3, 31);
+            //}
+            //else {
+            //    beginDate = new Date(today.getFullYear() - 1, 4, 1);
+            //    endDate = new Date(today.getFullYear(), 3, 31);
+            //}
+
+            $('#BeginDate, #EndDate').daterangepicker({
+                singleDatePicker: true,
+                showDropDowns: true,
+                autoUpdateInput: true,
+                locale: {
+                    format: "DD/MM/YYYY"
+                }
+            }, function (start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+            });
+            //$('#BeginDate').daterangepicker('setDate', beginDate);
+            //$('#EndDate').datepicker('setDate', endDate);
+        });
+    </script>
+}
