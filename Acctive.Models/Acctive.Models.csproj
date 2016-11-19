@@ -88,6 +88,10 @@
     <Compile Include="Inventory\UnitConversion.cs" />
     <Compile Include="Inventory\Warehouse.cs" />
     <Compile Include="Context\AcctiveDbContext.cs" />
+    <Compile Include="Migrations\201611190437293_RowVersion.cs" />
+    <Compile Include="Migrations\201611190437293_RowVersion.Designer.cs">
+      <DependentUpon>201611190437293_RowVersion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Application\Address.cs" />
@@ -98,7 +102,11 @@
     <None Include="MyData.ruleset" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201611190437293_RowVersion.resx">
+      <DependentUpon>201611190437293_RowVersion.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

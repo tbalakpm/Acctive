@@ -70,6 +70,8 @@ namespace Acctive.Models.Context
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
+            #region One-to-many and many-to-many
+
             modelBuilder.Entity<Company>()
                 .HasMany(c => c.Addresses)
                 .WithMany(a => a.Companies)
@@ -102,6 +104,17 @@ namespace Acctive.Models.Context
 
             modelBuilder.Entity<Inventory.UnitConversion>()
                 .Property(x => x.Factor).HasPrecision(12, 5);
+
+            #endregion One-to-many and many-to-many
+
+            #region RowVersion => ConcurrencyToken
+
+            modelBuilder.Entity<Accounting.Journal>()
+                .Property(x => x.RowVersion).IsConcurrencyToken();
+            modelBuilder.Entity<Inventory.Invoice>()
+                .Property(x => x.RowVersion).IsConcurrencyToken();
+
+            #endregion RowVersion => ConcurrencyToken
         }
     }
 }

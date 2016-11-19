@@ -32,8 +32,8 @@ BEGIN
 		FROM dbo.UnitConversion WITH(NOLOCK)
 		WHERE FromUnitId=@UnitTo AND ToUnitId=@UnitFrom
 		ORDER BY CalcStep desc
-	ELSE
-		SET @result=null
+	--ELSE
+	--	SET @result=null
 
 	RETURN @result;
 END
@@ -84,12 +84,16 @@ BEGIN
 	FROM Unit_cte
 	ORDER BY [Level] DESC
 
-	RETURN @ChildUnitId
+	RETURN CASE WHEN @ChildUnitId IS NULL THEN @UnitId ELSE @ChildUnitId END
 END
 go
 
+SELECT FromUnitId, ToUnitId, [Level]=1
+FROM UnitConversion
+WHERE FromUnitId=1
+
 --EXEC usp_GetChildUnit 9
-SELECT dbo.ufn_GetChildUnit(9)
+SELECT dbo.ufn_GetChildUnit(1)
 
 SELECT * FROM Inventory
 SELECT * FROM InvoiceItem
@@ -98,7 +102,12 @@ go
 select * from Inventory
 go
 
--- EXEC usp_SaveInventory 'MOUSE', 5, 2, 3
+SELECT dbo.ufn_GetChildUnit(1)
+SELECT dbo.ufn_ConvertUnit(1, 3, 40)
+SELECT TOP 1 Quantity, UnitId FROM Inventory WITH(NOLOCK) WHERE Code='MOUSE' AND ProductId=5
+GO
+
+-- EXEC usp_SaveInventory 'MOUSE', 5, -8, 1
 ALTER PROCEDURE usp_SaveInventory
 (
 	@Code nvarchar(15)
@@ -116,7 +125,7 @@ BEGIN
 	DECLARE @NewUnitId int
 
 	SELECT @NewUnitId = dbo.ufn_GetChildUnit(@UnitId)
-	SELECT @NewQty = dbo.ufn_ConvertUnit(@UnitId, @NewUnitId, ABS(@Quantity))
+	SELECT @NewQty = dbo.ufn_ConvertUnit(@UnitId, @NewUnitId, @Quantity)
 
 	IF NOT EXISTS(SELECT TOP 1 'A' FROM Inventory WITH(NOLOCK) WHERE Code=@Code AND ProductId=@ProductId AND UnitId=@NewUnitId)
 		INSERT INTO Inventory(Code, ProductId, Quantity, UnitId, [Description], ExpiryDate)
@@ -133,8 +142,10 @@ BEGIN
 			DECLARE @NewDbUnitId int
 			DECLARE @NewDbQty money
 			SELECT @NewDbUnitId = dbo.ufn_GetChildUnit(@dbUnitId)
-			SELECT @NewDbQty = dbo.ufn_ConvertUnit(@dbUnitId, @NewUnitId, ABS(@dbQty))
-			UPDATE Inventory WITH(ROWLOCK) SET Quantity=@NewDbQty, UnitId=@NewDbUnitId WHERE Code=@Code AND ProductId=@ProductId AND UnitId=@dbUnitId
+			SELECT @NewDbQty = dbo.ufn_ConvertUnit(@dbUnitId, @NewUnitId, @dbQty)
+			
+			UPDATE Inventory WITH(ROWLOCK) SET Quantity=@NewDbQty, UnitId=@NewDbUnitId 
+			WHERE Code=@Code AND ProductId=@ProductId AND UnitId=@dbUnitId
 		END
 
 		-- Common update
@@ -148,7 +159,48 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE usp_GetInventory
+(
+	@ProductId int
+	,@Code varchar(15)
+	,@CompanyId int
+	,@PeriodId int
+)
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT p.Id ProductId
+	,CASE WHEN ISNULL(i.Code,'')='' THEN p.Code ELSE I.Code END Code
+	, p.[Name] ProductName
+	,CASE WHEN ISNULL(i.[Description],'')='' THEN p.[Description] ELSE i.[Description] END [Description]
+	,p.CostPrice, p.ProfitPercent, p.SellingPrice, p.TaxPercent
+	,p.Surcharge, p.Freight
+	,p.MinimumQuantity, p.MaximumQuantity, p.ReorderLevelQuantity
+	,i.ExpiryDate, i.Quantity, I.UnitId
+	FROM Inventory i WITH(NOLOCK)
+	INNER JOIN Product p WITH(NOLOCK) ON i.ProductId=p.Id
+
+	SET NOCOUNT OFF;
+END
+GO
+
 SELECT * FROM Product
+
+SELECT * FROM Invoice
+SELECT * FROM InvoiceItem
+
+SELECT * FROM Inventory
+
+select * from Account
+
+INSERT INTO Invoice(Code,[Date],AccountId,TranAccountId,[Type],PeriodId) VALUES('M-001','2016-11-01'
+
+SELECT 1
+FROM Invoice i WITH(NOLOCK)
+INNER JOIN (InvoiceItem ii WITH(NOLOCK) INNER JOIN Inventory inv WITH(NOLOCK) ON ii.InventoryId=inv.Id) ON i.Id=ii.InvoiceId
+INNER JOIN (Company c WITH(NOLOCK) INNER JOIN [Period] p WITH(NOLOCK) ON c.Id=p.CompanyId) ON i.PeriodId=p.Id
+
 
 INSERT INTO Product(Code, [Name], LevelNumber, IndexNumber, IsGroup, UnitId, CostPrice, SellingPrice, TaxPercent, Surcharge, Freight, ProfitPercent,
 MinimumQuantity, MaximumQuantity, ReorderLevelQuantity, CompanyId, Active)

@@ -18,8 +18,8 @@ namespace Acctive.Models.Application
         [StringLength(255)]
         public string ConfigValue { get; set; }
 
-        [Timestamp]
-        public byte[] RowVersion { get; set; }
+        //[Timestamp]
+        //public byte[] RowVersion { get; set; }
 
         public bool Active { get; set; }
 

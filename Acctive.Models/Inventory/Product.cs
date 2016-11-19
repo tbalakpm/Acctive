@@ -27,8 +27,8 @@ namespace Acctive.Models.Inventory
         [ForeignKey("Parent")]
         public int? ParentId { get; set; }
 
-        public int LevelNumber { get; set; }
-        public int IndexNumber { get; set; }
+        //public int LevelNumber { get; set; }
+        //public int IndexNumber { get; set; }
         public bool IsGroup { get; set; }
 
         [ForeignKey("Category")]
@@ -38,31 +38,31 @@ namespace Acctive.Models.Inventory
         public int UnitId { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal CostPrice { get; set; }
+        public decimal? CostPrice { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal ProfitPercent { get; set; }
+        public decimal? ProfitPercent { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal SellingPrice { get; set; }
+        public decimal? SellingPrice { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal TaxPercent { get; set; }
+        public decimal? TaxPercent { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal Surcharge { get; set; }
+        public decimal? Surcharge { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal Freight { get; set; }
+        public decimal? Freight { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal MinimumQuantity { get; set; }
+        public decimal? MinimumQuantity { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal MaximumQuantity { get; set; }
+        public decimal? MaximumQuantity { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal ReorderLevelQuantity { get; set; }
+        public decimal? ReorderLevelQuantity { get; set; }
 
         [Column(TypeName = "varchar")]
         [StringLength(255)]
