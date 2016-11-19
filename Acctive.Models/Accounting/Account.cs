@@ -19,7 +19,7 @@ namespace Acctive.Models.Accounting
         public string Code { get; set; }
 
         [Required(ErrorMessage = "Account name cannot be empty")]
-        [Index("AcctName", IsUnique = true, Order = 1)]
+        [Index("IX_Name", IsUnique = true, Order = 1)]
         [StringLength(50)]
         public string Name { get; set; }
 
@@ -29,8 +29,9 @@ namespace Acctive.Models.Accounting
         [ForeignKey("Parent")]
         public int? ParentId { get; set; }
 
-        public int LevelNumber { get; set; }
-        public int IndexNumber { get; set; }
+        //public int LevelNumber { get; set; }
+        public int? SequenceNumber { get; set; }
+
         public bool IsGroup { get; set; }
 
         [ForeignKey("Category")]
@@ -40,7 +41,7 @@ namespace Acctive.Models.Accounting
         [StringLength(255)]
         public string ImageFilePath { get; set; }
 
-        [Index("AcctName", IsUnique = true, Order = 2)]
+        [Index("IX_Name", IsUnique = true, Order = 2)]
         [ForeignKey("Company")]
         public int CompanyId { get; set; }
 

@@ -1,5 +1,4 @@
 ﻿using Acctive.Models.Application;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -34,8 +33,8 @@ namespace Acctive.Models.Inventory
         [ForeignKey("Category")]
         public int? CategoryId { get; set; }
 
-        [ForeignKey("Unit")]
-        public int UnitId { get; set; }
+        //[ForeignKey("Unit")]
+        //public int UnitId { get; set; }
 
         [Column(TypeName = "money")]
         public decimal? CostPrice { get; set; }
@@ -75,10 +74,11 @@ namespace Acctive.Models.Inventory
 
         public virtual Product Parent { get; set; }
         public virtual ProductCategory Category { get; set; }
-        public virtual Unit Unit { get; set; }
+
+        //public virtual Unit Unit { get; set; }
         public virtual Company Company { get; set; }
 
-        public virtual List<Product> Children { get; set; }
-        public virtual List<Inventory> Inventories { get; set; }
+        //public virtual List<Product> Children { get; set; }
+        //public virtual List<Inventory> Inventories { get; set; }
     }
 }

@@ -2,17 +2,18 @@
 namespace Acctive.Models.Migrations
 {
     using System.CodeDom.Compiler;
+    using System.Data.Entity.Migrations;
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
-
+    
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class RowVersion : IMigrationMetadata
+    public sealed partial class DefaultValue : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(RowVersion));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(DefaultValue));
         
         string IMigrationMetadata.Id
         {
-            get { return "201611190437293_RowVersion"; }
+            get { return "201611190524198_DefaultValue"; }
         }
         
         string IMigrationMetadata.Source

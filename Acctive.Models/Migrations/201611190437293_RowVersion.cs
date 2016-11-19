@@ -1,8 +1,7 @@
 namespace Acctive.Models.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class RowVersion : DbMigration
     {
         public override void Up()
@@ -21,7 +20,7 @@ namespace Acctive.Models.Migrations
             DropColumn("dbo.Product", "LevelNumber");
             DropColumn("dbo.Product", "IndexNumber");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.Product", "IndexNumber", c => c.Int(nullable: false));

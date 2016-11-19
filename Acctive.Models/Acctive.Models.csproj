@@ -92,6 +92,10 @@
     <Compile Include="Migrations\201611190437293_RowVersion.Designer.cs">
       <DependentUpon>201611190437293_RowVersion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611190524198_DefaultValue.cs" />
+    <Compile Include="Migrations\201611190524198_DefaultValue.Designer.cs">
+      <DependentUpon>201611190524198_DefaultValue.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Application\Address.cs" />
@@ -105,6 +109,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201611190437293_RowVersion.resx">
       <DependentUpon>201611190437293_RowVersion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611190524198_DefaultValue.resx">
+      <DependentUpon>201611190524198_DefaultValue.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

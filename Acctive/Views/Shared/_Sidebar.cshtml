@@ -93,7 +93,7 @@
             <li>
                 <a><i class="fa fa-table"></i> Master <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li><a href="tables.html">Products</a></li>
+                    <li>@Html.ActionLink("Products", "Index", "Products", routeValues: null, htmlAttributes: new { id = "product" })</li>
                     <li><a href="tables_dynamic.html">Product Categories</a></li>
                     <li>@Html.ActionLink("Units", "Index", "Unit", routeValues: null, htmlAttributes: new { id = "unit" })</li>
                     <li>@Html.ActionLink("Goodowns/Warehouses", "Index", "Warehouses", routeValues: null, htmlAttributes: new { id = "warehouse" })</li>
