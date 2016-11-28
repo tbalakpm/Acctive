@@ -1,7 +1,7 @@
 ﻿@model Acctive.Models.Inventory.Product
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete Product";
 }
 
 <h2>Delete</h2>
@@ -154,10 +154,10 @@
         <dd>
             @Html.DisplayFor(model => model.Active)
         </dd>
-
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

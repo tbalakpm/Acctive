@@ -1,7 +1,7 @@
 ﻿@model Acctive.Models.Accounting.Account
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete Ledger";
 }
 
 <h2>Delete</h2>
@@ -90,10 +90,10 @@
         <dd>
             @Html.DisplayFor(model => model.Active)
         </dd>
-
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

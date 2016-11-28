@@ -17,7 +17,7 @@ namespace Acctive.Models
         public override string ToString()
         {
             var displayString = CompanyName;
-            displayString += string.IsNullOrWhiteSpace(PeriodCode) ? string.Empty : string.Format("[{1}]", PeriodCode);
+            displayString += string.IsNullOrWhiteSpace(PeriodCode) ? string.Empty : string.Format(" [{0}]", PeriodCode);
             return displayString;
         }
     }
