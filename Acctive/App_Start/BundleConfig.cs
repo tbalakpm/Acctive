@@ -8,6 +8,8 @@ namespace Acctive
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            BundleTable.EnableOptimizations = false;
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                 //"~/vendors/jquery/dist/jquery.js"));
                 "~/Scripts/jquery-{version}.js"));
@@ -16,7 +18,7 @@ namespace Acctive
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            //bundles.Add(new ScriptBundle("~/bundles/modernizr").Include("~/Scripts/modernizr-*"));
+            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include("~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                 "~/Scripts/bootstrap.js",
@@ -25,7 +27,7 @@ namespace Acctive
                 "~/build/js/custom.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
-                "~/Scripts/DataTables/jquery.dataTables.js",
+                "~/Scripts/DataTables/jquery.dataTables.min.js",
                 "~/Scripts/DataTables/dataTables.bootstrap.js",
                 "~/Scripts/DataTables/dataTables.buttons.js",
                 "~/Scripts/DataTables/buttons.bootstrap.js",
@@ -58,12 +60,14 @@ namespace Acctive
                 "~/Content/iCheck/flat/green.css",
                 "~/build/css/custom.css"));
 
-            bundles.Add(new StyleBundle("~/Content/datatables").Include(
+            bundles.Add(new StyleBundle("~/Content/datatable").Include(
+                /*"~/Content/DataTables/css/jquery.dataTables.min.css",*/
                 "~/Content/DataTables/css/dataTables.bootstrap.min.css",
                 "~/Content/DataTables/css/buttons.bootstrap.min.css",
                 "~/Content/DataTables/css/fixedHeader.bootstrap.min.css",
                 "~/Content/DataTables/css/responsive.bootstrap.min.css",
-                "~/Content/DataTables/css/scroller.bootstrap.min.css"));
+                "~/Content/DataTables/css/scroller.bootstrap.min.css"
+                ));
         }
     }
 }
