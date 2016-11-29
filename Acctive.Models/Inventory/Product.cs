@@ -1,4 +1,5 @@
 ﻿using Acctive.Models.Application;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -23,6 +24,7 @@ namespace Acctive.Models.Inventory
         [StringLength(255)]
         public string Description { get; set; }
 
+        [DisplayName("Parent")]
         [ForeignKey("Parent")]
         public int? ParentId { get; set; }
 
@@ -30,21 +32,26 @@ namespace Acctive.Models.Inventory
         //public int IndexNumber { get; set; }
         public bool IsGroup { get; set; }
 
+        [DisplayName("Category")]
         [ForeignKey("Category")]
         public int? CategoryId { get; set; }
 
         //[ForeignKey("Unit")]
         //public int UnitId { get; set; }
 
+        [DisplayName("Cost Price")]
         [Column(TypeName = "money")]
         public decimal? CostPrice { get; set; }
 
+        [DisplayName("Profit %")]
         [Column(TypeName = "money")]
         public decimal? ProfitPercent { get; set; }
 
+        [DisplayName("Selling Price")]
         [Column(TypeName = "money")]
         public decimal? SellingPrice { get; set; }
 
+        [DisplayName("Tax %")]
         [Column(TypeName = "money")]
         public decimal? TaxPercent { get; set; }
 
@@ -54,12 +61,15 @@ namespace Acctive.Models.Inventory
         [Column(TypeName = "money")]
         public decimal? Freight { get; set; }
 
+        [DisplayName("Min.Qty.")]
         [Column(TypeName = "money")]
         public decimal? MinimumQuantity { get; set; }
 
+        [DisplayName("Max.Qty.")]
         [Column(TypeName = "money")]
         public decimal? MaximumQuantity { get; set; }
 
+        [DisplayName("Re-Order Level")]
         [Column(TypeName = "money")]
         public decimal? ReorderLevelQuantity { get; set; }
 

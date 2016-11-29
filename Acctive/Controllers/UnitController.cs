@@ -28,20 +28,20 @@ namespace Acctive.Controllers
             return View(await db.Unit.ToListAsync());
         }
 
-        // GET: Unit/Details/5
-        public async Task<ActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Unit unit = await db.Unit.FindAsync(id);
-            if (unit == null)
-            {
-                return HttpNotFound();
-            }
-            return View(unit);
-        }
+        //// GET: Unit/Details/5
+        //public async Task<ActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Unit unit = await db.Unit.FindAsync(id);
+        //    if (unit == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(unit);
+        //}
 
         // GET: Unit/Create
         public ActionResult Create()
