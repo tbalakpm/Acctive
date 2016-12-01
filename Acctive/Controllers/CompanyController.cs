@@ -21,7 +21,8 @@ namespace Acctive.Controllers
         // GET: Company
         public async Task<ActionResult> Index()
         {
-            return View(await db.Company.ToListAsync());
+            var comps = db.Company.Where(x => x.Active);
+            return View(await comps.ToListAsync());
         }
 
         // GET: Company/Open
