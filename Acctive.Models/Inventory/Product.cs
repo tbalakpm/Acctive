@@ -73,6 +73,7 @@ namespace Acctive.Models.Inventory
         [Column(TypeName = "money")]
         public decimal? ReorderLevelQuantity { get; set; }
 
+        [DisplayName("Image URL")]
         [Column(TypeName = "varchar")]
         [StringLength(255)]
         public string ImageFilePath { get; set; }

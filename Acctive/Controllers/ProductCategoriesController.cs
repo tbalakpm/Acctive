@@ -13,85 +13,82 @@ using System.Web.Mvc;
 
 namespace Acctive.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductCategoriesController : Controller
     {
         private AcctiveDbContext db = new AcctiveDbContext();
 
-        // GET: Products
+        // GET: ProductCategories
         public async Task<ActionResult> Index()
         {
-            //var product = db.Product.Include(p => p.Category).Include(p => p.Company).Include(p => p.Parent);
+            //var productCategory = db.ProductCategory.Include(p => p.Company);
 
             int companyId = GetCompanyId();
             if (companyId == 0)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             else
             {
-                var products = db.Product.Where(x => x.CompanyId == companyId);
-                return View(await products.ToListAsync());    //db.Product.ToListAsync()
+                var prodcats = db.ProductCategory.Where(x => x.CompanyId == companyId);
+                return View(await prodcats.ToListAsync());    //db.Product.ToListAsync()
             }
         }
 
-        //// GET: Products/Details/5
+        //// GET: ProductCategories/Details/5
         //public async Task<ActionResult> Details(int? id)
         //{
         //    if (id == null)
         //    {
         //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         //    }
-        //    Product product = await db.Product.FindAsync(id);
-        //    if (product == null)
+        //    ProductCategory productCategory = await db.ProductCategory.FindAsync(id);
+        //    if (productCategory == null)
         //    {
         //        return HttpNotFound();
         //    }
-        //    return View(product);
+        //    return View(productCategory);
         //}
 
-        // GET: Products/Create
+        // GET: ProductCategories/Create
         public ActionResult Create()
         {
+            //ViewBag.CompanyId = new SelectList(db.Company, "Id", "Code");
             int companyId = GetCompanyId();
             if (companyId == 0)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             else
             {
-                ViewBag.CategoryId = new SelectList(db.ProductCategory.Where(x => x.CompanyId == companyId), "Id", "Name");
-                ViewBag.ParentId = new SelectList(db.Product.Where(x => x.CompanyId == companyId && x.IsGroup), "Id", "Name");
-                return View(new Product());
+                return View(new ProductCategory());
             }
         }
 
-        // POST: Products/Create
+        // POST: ProductCategories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Code,Name,Description,ParentId,IsGroup,CategoryId,CostPrice,ProfitPercent,SellingPrice,TaxPercent,Surcharge,Freight,MinimumQuantity,MaximumQuantity,ReorderLevelQuantity,ImageFilePath,Active")] Product product)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Code,Name,Description,ImageFilePath,Active")] ProductCategory productCategory)
         {
-            int companyId = GetCompanyId();
             if (ModelState.IsValid)
             {
-                product.CompanyId = companyId;
-
-                db.Product.Add(product);
+                int companyId = GetCompanyId();
+                productCategory.CompanyId = companyId;
+                db.ProductCategory.Add(productCategory);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Create");
+                return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryId = new SelectList(db.ProductCategory.Where(x => x.CompanyId == companyId), "Id", "Name", product.CategoryId);
-            ViewBag.ParentId = new SelectList(db.Product.Where(x => x.CompanyId == companyId && x.IsGroup), "Id", "Name", product.ParentId);
-            return View(product);
+            //ViewBag.CompanyId = new SelectList(db.Company, "Id", "Code", productCategory.CompanyId);
+            return View(productCategory);
         }
 
-        // GET: Products/Edit/5
+        // GET: ProductCategories/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = await db.Product.FindAsync(id);
-            if (product == null)
+            ProductCategory productCategory = await db.ProductCategory.FindAsync(id);
+            if (productCategory == null)
             {
                 return HttpNotFound();
             }
@@ -100,44 +97,38 @@ namespace Acctive.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             else
             {
-                ViewBag.CategoryId = new SelectList(db.ProductCategory.Where(x => x.CompanyId == companyId), "Id", "Name", product.CategoryId);
-                ViewBag.ParentId = new SelectList(db.Product.Where(x => x.CompanyId == companyId && x.Id != product.Id && x.IsGroup), "Id", "Name", product.ParentId);
-                return View(product);
+                return View(productCategory);
             }
         }
 
-        // POST: Products/Edit/5
+        // POST: ProductCategories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Code,Name,Description,ParentId,IsGroup,CategoryId,CostPrice,ProfitPercent,SellingPrice,TaxPercent,Surcharge,Freight,MinimumQuantity,MaximumQuantity,ReorderLevelQuantity,ImageFilePath,Active")] Product product)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Code,Name,Description,ImageFilePath,Active")] ProductCategory productCategory)
         {
-            int companyId = GetCompanyId();
-
             if (ModelState.IsValid)
             {
-                product.CompanyId = companyId;
-
-                db.Entry(product).State = EntityState.Modified;
+                int companyId = GetCompanyId();
+                productCategory.CompanyId = companyId;
+                db.Entry(productCategory).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.CategoryId = new SelectList(db.ProductCategory.Where(x => x.CompanyId == companyId), "Id", "Name", product.CategoryId);
-            ViewBag.ParentId = new SelectList(db.Product.Where(x => x.CompanyId == companyId && x.Id != product.Id && x.IsGroup), "Id", "Name", product.ParentId);
-            return View(product);
+            //ViewBag.CompanyId = new SelectList(db.Company, "Id", "Code", productCategory.CompanyId);
+            return View(productCategory);
         }
 
-        // GET: Products/Delete/5
+        // GET: ProductCategories/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = await db.Product.FindAsync(id);
-            if (product == null)
+            ProductCategory productCategory = await db.ProductCategory.FindAsync(id);
+            if (productCategory == null)
             {
                 return HttpNotFound();
             }
@@ -146,19 +137,17 @@ namespace Acctive.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             else
             {
-                ViewBag.CategoryId = new SelectList(db.ProductCategory.Where(x => x.CompanyId == companyId), "Id", "Name", product.CategoryId);
-                ViewBag.ParentId = new SelectList(db.Product.Where(x => x.CompanyId == companyId && x.Id != product.Id && x.IsGroup), "Id", "Name", product.ParentId);
-                return View(product);
+                return View(productCategory);
             }
         }
 
-        // POST: Products/Delete/5
+        // POST: ProductCategories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Product product = await db.Product.FindAsync(id);
-            db.Product.Remove(product);
+            ProductCategory productCategory = await db.ProductCategory.FindAsync(id);
+            db.ProductCategory.Remove(productCategory);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

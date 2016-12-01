@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acctive", "Acctive\Acctive.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acctive.Models", "Acctive.Models\Acctive.Models.csproj", "{BF3C588A-3A55-4901-878F-8CD00C4AB1A6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Refs", "Refs", "{39C3531C-AD50-44DD-A54C-9E280682AC9E}"
+	ProjectSection(SolutionItems) = preProject
+		Product Properties.txt = Product Properties.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

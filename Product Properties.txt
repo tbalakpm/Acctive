@@ -1,0 +1,9 @@
+Size
+Weight
+Capacity
+Dimensions
+
+Tag No.
+Lot No.
+Batch No.
+Expiry Date
