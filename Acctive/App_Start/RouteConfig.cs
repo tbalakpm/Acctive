@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Acctive.Extensions;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,12 +13,14 @@ namespace Acctive
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            //UrlHelper url = new UrlHelper(HttpContext.Current.Request.RequestContext);
+
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional, returnUrl = "/Company/Open" }
+                defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional, returnUrl = "Company/Open" }
             );
         }
     }

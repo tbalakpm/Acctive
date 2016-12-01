@@ -1,4 +1,5 @@
-﻿using Acctive.Models;
+﻿using Acctive.Extensions;
+using Acctive.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -454,6 +455,12 @@ namespace Acctive.Controllers
 
         private ActionResult RedirectToLocal(string returnUrl)
         {
+            string controllerName= returnUrl.Split('/')[0];
+            string actionName = returnUrl.Split('/')[1]; 
+
+            UrlHelper url = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
+            returnUrl = url.Action(actionName, controllerName);
+
             if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
