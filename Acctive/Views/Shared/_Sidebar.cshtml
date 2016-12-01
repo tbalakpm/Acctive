@@ -91,14 +91,19 @@
         <h3>Maintenance</h3>
         <ul class="nav side-menu">
             <li>
-                <a><i class="fa fa-table"></i> Master <span class="fa fa-chevron-down"></span></a>
+                <a><i class="fa fa-table"></i> Company <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li>@Html.ActionLink("Products", "Index", "Products", routeValues: null, htmlAttributes: new { id = "product" })</li>
                     <li>@Html.ActionLink("Product Categories", "Index", "ProductCategories", routeValues: null, htmlAttributes: new { id = "prodcats" })</li>
+                    <li>@Html.ActionLink("Ledgers", "Index", "Ledgers", routeValues: null, htmlAttributes: new { id = "ledger" })</li>
+                    <li><a href="#">Ledger Groups</a></li>
+                </ul>
+            </li>
+            <li>
+                <a><i class="fa fa-cube"></i> Application <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
                     <li>@Html.ActionLink("Units", "Index", "Unit", routeValues: null, htmlAttributes: new { id = "unit" })</li>
                     <li>@Html.ActionLink("Goodowns/Warehouses", "Index", "Warehouses", routeValues: null, htmlAttributes: new { id = "warehouse" })</li>
-                    <li>@Html.ActionLink("Ledgers", "Index", "Ledgers", routeValues: null, htmlAttributes: new { id = "ledger" })</li>
-                    <li><a href="tables_dynamic.html">Ledger Groups</a></li>
                 </ul>
             </li>
             <li>
@@ -113,7 +118,8 @@
                 <a><i class="fa fa-university"></i> Company <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="@Url.Action("Open","Company")">Open</a></li>
-                    <li><a href="tables_dynamic.html">Close</a></li>
+                    <li><a href="@Url.Action("Index","Company")">List</a></li>
+                    <!--<li><a href="tables_dynamic.html">Close</a></li>-->
                 </ul>
             </li>
         </ul>

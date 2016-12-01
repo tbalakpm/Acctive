@@ -32,21 +32,6 @@ namespace Acctive.Controllers
             }
         }
 
-        //// GET: ProductCategories/Details/5
-        //public async Task<ActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    ProductCategory productCategory = await db.ProductCategory.FindAsync(id);
-        //    if (productCategory == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(productCategory);
-        //}
-
         // GET: ProductCategories/Create
         public ActionResult Create()
         {
@@ -73,7 +58,7 @@ namespace Acctive.Controllers
                 productCategory.CompanyId = companyId;
                 db.ProductCategory.Add(productCategory);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             //ViewBag.CompanyId = new SelectList(db.Company, "Id", "Code", productCategory.CompanyId);
