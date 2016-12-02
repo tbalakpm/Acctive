@@ -12,7 +12,8 @@ namespace Acctive
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                 //"~/vendors/jquery/dist/jquery.js"));
-                "~/Scripts/jquery-{version}.js"));
+                "~/Scripts/jquery-{version}.js"
+                ));
 
             //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*"));
 
@@ -24,7 +25,8 @@ namespace Acctive
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/respond.js",
                 "~/Scripts/nprogress.js",
-                "~/build/js/custom.js"));
+                "~/build/js/custom.js"
+                ));
 
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
                 "~/Scripts/DataTables/jquery.dataTables.min.js",
@@ -50,7 +52,12 @@ namespace Acctive
 
             bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
                 "~/Scripts/moment.js",
-                "~/Scripts/daterangepicker.js"));
+                "~/Scripts/daterangepicker.js"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/select2").Include(
+                "~/Scripts/select2.min.js"
+                ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
@@ -58,7 +65,8 @@ namespace Acctive
                 "~/Content/nprogress.css",
                 "~/Content/animate.css",
                 "~/Content/iCheck/flat/green.css",
-                "~/build/css/custom.css"));
+                "~/build/css/custom.css"
+                ));
 
             bundles.Add(new StyleBundle("~/Content/datatable").Include(
                 /*"~/Content/DataTables/css/jquery.dataTables.min.css",*/
@@ -67,6 +75,10 @@ namespace Acctive
                 "~/Content/DataTables/css/fixedHeader.bootstrap.min.css",
                 "~/Content/DataTables/css/responsive.bootstrap.min.css",
                 "~/Content/DataTables/css/scroller.bootstrap.min.css"
+                ));
+
+            bundles.Add(new StyleBundle("~/Content/select2").Include(
+                "~/Content/css/select2.min.css"
                 ));
         }
     }

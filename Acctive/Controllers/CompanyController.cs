@@ -21,8 +21,8 @@ namespace Acctive.Controllers
         // GET: Company
         public async Task<ActionResult> Index()
         {
-            var comps = db.Company.Where(x => x.Active);
-            return View(await comps.ToListAsync());
+            //var comps = db.Company.Where(x => x.Active);
+            return View(await db.Company.ToListAsync());
         }
 
         // GET: Company/Open
@@ -31,7 +31,11 @@ namespace Acctive.Controllers
         {
             if (id == null)
             {
-                return View(await db.Company.ToListAsync());
+                var comps = db.Company.Where(x => x.Active);
+                if (comps.Count() == 1)
+                    id = comps.FirstOrDefault().Id;
+                else
+                    return View(await comps.ToListAsync());
             }
             Company company = await db.Company.FindAsync(id);
             var active = new ActiveItem
