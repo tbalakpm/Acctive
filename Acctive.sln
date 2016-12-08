@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acctive.Models", "Acctive.M
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Refs", "Refs", "{39C3531C-AD50-44DD-A54C-9E280682AC9E}"
 	ProjectSection(SolutionItems) = preProject
+		JavaScript Libraries.txt = JavaScript Libraries.txt
 		Product Properties.txt = Product Properties.txt
 	EndProjectSection
 EndProject

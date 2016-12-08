@@ -1,0 +1,12 @@
+jqueryrain.com
+jQWidgets
+http://jquerycards.com/
+
+jQuery
+Bootstrap
+DateTimePicker
+SmartWizard
+NProgress
+dataTables
+Select2
+iCheck
